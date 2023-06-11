@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  out-of-office-bot-app:
+    image: out-of-office-bot-app
+    container_name: out-of-office-bot-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mysql-standalone
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-standalone:3306/ooo
+      SPRING_DATASOURCE_USERNAME: "oooUser"
+      SPRING_DATASOURCE_PASSWORD: "oooUser"
+    networks:
+      - backend
+
+# MYSQL
+  mysql-standalone:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    container_name: mysql-standalone
+    environment:
+      MYSQL_DATABASE: ooo
+      MYSQL_USER: oooUser
+      MYSQL_PASSWORD: oooUser
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
+      - $HOME/Development/Out-of-office-slackapp-bot/V1__initOfDatabase.sql:/V1__initOfDatabase.sql
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  backend:

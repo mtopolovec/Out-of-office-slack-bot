@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/Out_of_office_bot-0.0.1-SNAPSHOT.jar
