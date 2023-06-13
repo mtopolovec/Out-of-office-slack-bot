@@ -22,7 +22,7 @@ public class UserOOOInputToUserOOOInputDTO implements Converter<UserOOOInput, Us
                 createCorrectNameAndSurname(source.getSlackUsername()),
                 source.getDescription(),
                 source.getStartTime(),
-                source.getEndTime()
+                source.getEndTime().minusMinutes(1)
         );
     }
 

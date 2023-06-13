@@ -86,9 +86,9 @@ public class TimeDateIntervalExtractor {
                 .map(result -> LocalDate.parse(result.group(), DATE_FORMATTER))
                 .collect(Collectors.toList());
         if (times.size() == 1) {
-            return new DateTimeInterval(times.get(0).atStartOfDay(), times.get(0).atTime(LocalTime.MAX).minusMinutes(1));
+            return new DateTimeInterval(times.get(0).atStartOfDay(), times.get(0).atTime(LocalTime.MAX));
         } else {
-            return new DateTimeInterval(times.get(0).atStartOfDay(), times.get(1).atTime(LocalTime.MAX).minusMinutes(1));
+            return new DateTimeInterval(times.get(0).atStartOfDay(), times.get(1).atTime(LocalTime.MAX));
         }
     }
 
